@@ -137,22 +137,12 @@ and should return a new array that is identical to the old array. You can name t
 
 function copy(newArray, oldArray){
     
-//     console.log(newArray)      
-//     console.log(oldArray)
-    
-    newArray = [...oldArray]
-    
-//     console.log(newArray)      
-//     console.log(oldArray)   
-//     console.log('================')
-}
-//    console.log('--------------------')
-   copy ('originalFlavorsCopy', originalFlavors)
-//    console.log(newArray)
-//    console.log(originalFlavors)
-//    console.log(originalFlavorsCopy)
-    
+    newArray = [...oldArray]    
+    return newArray
 
+}
+copy ('originalFlavorsCopy', originalFlavors)
+  
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
 Your function should accept: 
@@ -168,18 +158,18 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function copy(newArray, oldArray){
-    
-    newArray = [...oldArray]    
-    console.log(newArray)
-    console.log('__--^^^-New-^^^--__')
-    console.log('--__vvv-Old-vvv__--')
-    console.log(oldArray)
+function filterByWord(arr, flavor) {
+    let newArray = []
+    for (let i = 0; i < arr.length; i++)
+        if(arr[i].includes(flavor)){
+            newArray.push(arr[i]);
+        }
+ 
     return newArray
-
 }
 copy ('originalFlavorsCopy', originalFlavors)
-
+     //---UNDEFINED-----//
+     //No matter what i do//
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
 
@@ -193,12 +183,45 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
+function getAverageWordCount(arr){
+    let x = 0
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i].includes(' ')){
+            let anotherWord = arr[i]
+            for (let i = 0; i < anotherWord.length; i++){
+                if (anotherWord.slice(i, i+1) === ' '){x++}
+            }
+        }
+    }
+    x = ((x + arr.length)/arr.length)
+    console.log('Average Word Count: ' + x)
+}
+getAverageWordCount(originalFlavors)
 
-    /*code here*/
-
+function getAverageWordLength(arr){
+    let x = 0, y = 0
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i].includes(' ')){
+            let anotherWord = arr[i]
+            for (let i = 0; i < anotherWord.length; i++){
+                if (anotherWord.slice(i, i+1) === ' '){x++
+                }
+                    else{y++
+                    }
+            }
+        }
+            else for (let i = 0; i < arr[i].length; i++){
+                y++           
+        }
+    }
+    x = (x + arr.length)
+    let avg = y / x
+    console.log(x + 'Words')
+    console.log(y + 'Letters')
+    console.log('Average Word Length: ' + avg.toFixed(2) + ' Letters')
 }
 
+getAverageWordLength(originalFlavors)
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
 
@@ -281,8 +304,27 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
+function getRandomFlavors(arr1, arr2, arr3, arr4){
 
-    /*code here*/
+    let newArr = [...arr1]
+    for (let i=0; i<arr2.length; i++){
+        newArr.push(arr2[i])
+    }
+    for (let i=0; i<arr3.length; i++){
+        newArr.push(arr3[i])
+    }
+    for (let i=0; i<arr4.length; i++){
+        newArr.push(arr4[i])    
+    }
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);}
 
+    let randomArr = []
+    for (let i=0; i<31; i++){
+        randomArr.push(newArr.splice(getRandomInt(newArr.length), 1))
+    }
+console.log(randomArr.length + ' Random Flavors:')
+console.log(randomArr)
+return randomArr
 }
+getRandomFlavors(originalFlavors, newFlavors,  seasonalFlavors, regionalFlavors)
