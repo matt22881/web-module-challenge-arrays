@@ -40,11 +40,16 @@ To save you from having to count the items above, you can assume that length of 
 
 i.e. is31Flavors(originalFlavors) will return TRUE.*/
 
-function is31Flavors(/*code here*/){
+var emptyArray = []
 
-    /*code here*/
+function is31Flavors(arr){
 
-}
+    if (arr.length === 31) return true
+    else return false
+    }
+
+    console.log(is31Flavors(originalFlavors))
+    console.log(is31Flavors(emptyArray))
 
 /* Task 2: Corporate has come to you with an idea for a new flavor: Rainbow Sherbert! They think this will be a game changer. You need to modify the array to include this flavor. 
 
@@ -57,12 +62,14 @@ Your function should add the flavor to the front of the array and console.log th
 
 For example addFlavor("Rainbow Sherbert", originalFlavors) should return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla Burnt Almond"] */ 
 
-function addFlavor(/*code here*/){
+function addFlavor(newFlavor, arr){
 
-    /*code here*/
+    arr.unshift(newFlavor)
+    console.log(arr)
 
 }
 
+addFlavor('Rainbow Sherbert', originalFlavors)
 
 /* Task 3: Houston, we have a problem! There are now 32 flavors in the array! Your task is to remove an item from the end of the array. 
 
@@ -74,11 +81,14 @@ Your function should remove a flavor from the end of the array and console.log t
 
 For example removeLastFlavor(originalFlavors) would return ["Rainbow Sherbert", "Banana Nut Fudge",..."Vanilla"]*/ 
 
-function removeLastFlavor(/*code here*/){
+function removeLastFlavor(arr){
 
-    /*code here*/
+    arr.pop()
+    console.log(arr)
 
 }
+
+removeLastFlavor(originalFlavors)
 
 /* Task 4: Write a function that returns a flavor at a given index in the array.
 
@@ -89,11 +99,12 @@ Your function should accept:
 
 For example, getFlavorByIndex(originalFlavors, 2) would return "Black Walnut", assuming Rainbow Sherbert has been added successfully. */
 
-function getFlavorByIndex(/*code here*/){
+function getFlavorByIndex(arr, i){
 
-    /*code here*/
+    return arr[i]
 
 }
+console.log(getFlavorByIndex(originalFlavors, 2))
 
 /* Task 5: As corporate wants to add more and more flavors to their lineup, they've realized that they need to remove flavors based on flavor name, as opposed to just arbitrarily removing the first or last flavor. Your task is to get an index by flavor name, and remove that flavor from the array. 
 
@@ -108,12 +119,13 @@ Hint: You can use .splice() for this
 
 */
 
-function removeFlavorByName(/*code here*/){
+function removeFlavorByName(arr, flavor){
 
-    /*code here*/
-
+    let i = arr.indexOf(flavor);
+    arr.splice(i, 1)
+    console.log(arr)
 }
-
+removeFlavorByName(originalFlavors, 'Vanilla')
 
 /* Task 6: With all of these changes going on, we don't want to lose track of the actual, original 31 flavors. Write a function called copy that makes a copy of the array. 
 
@@ -123,12 +135,14 @@ Your function should accept:
 
 and should return a new array that is identical to the old array. You can name the new array however you'd like. */
 
-function copy(/*code here*/){
-
-    /*code here*/
+function copy(newArray, oldArray){
+    
+    newArray = [...oldArray]    
+    return newArray
 
 }
-
+copy ('originalFlavorsCopy', originalFlavors)
+  
 /* Task 7: July 7th is "World Chocolate Day" and Baskin Robins wants to create promotional materials highlighting all of their chocolate flavors. Write a function that checks every item in the array for a given string and returns a new array called filteredArray with just these values. Rather than hardcoding "chocolate" into your function, pass a string as a parameter, and invoke with the argument "chocolate". This way you could also filter for "Vanilla", "Sherbert", etc. when those holidays roll around.
 
 Your function should accept: 
@@ -144,13 +158,18 @@ DO NOT USE ADVANCED ARRAY METHODS (i.e. .filter) to solve this problem.
 
 hint - you can use the .includes method to help you solve this */
 
-function filterByWord(/*code here*/){
-
-    /*code here*/
-
+function filterByWord(arr, flavor) {
+    let newArray = []
+    for (let i = 0; i < arr.length; i++)
+        if(arr[i].includes(flavor)){
+            newArray.push(arr[i]);
+        }
+ 
+    return newArray
 }
-
-
+copy ('originalFlavorsCopy', originalFlavors)
+     //---UNDEFINED-----//
+     //No matter what i do//
 
 /* 🧁🍦🍨 STRETCH 🍨🍦🍫*/ 
 
@@ -164,12 +183,45 @@ and should return the average number of words per item in the array.
 
 For example, getAverageWordLength(originalFlavors) should return a number between 0 and 3. */
 
-function getAverageWordLength(/*code here*/){
+function getAverageWordCount(arr){
+    let x = 0
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i].includes(' ')){
+            let anotherWord = arr[i]
+            for (let i = 0; i < anotherWord.length; i++){
+                if (anotherWord.slice(i, i+1) === ' '){x++}
+            }
+        }
+    }
+    x = ((x + arr.length)/arr.length)
+    console.log('Average Word Count: ' + x)
+}
+getAverageWordCount(originalFlavors)
 
-    /*code here*/
-
+function getAverageWordLength(arr){
+    let x = 0, y = 0
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i].includes(' ')){
+            let anotherWord = arr[i]
+            for (let i = 0; i < anotherWord.length; i++){
+                if (anotherWord.slice(i, i+1) === ' '){x++
+                }
+                    else{y++
+                    }
+            }
+        }
+            else for (let i = 0; i < arr[i].length; i++){
+                y++           
+        }
+    }
+    x = (x + arr.length)
+    let avg = y / x
+    console.log(x + 'Words')
+    console.log(y + 'Letters')
+    console.log('Average Word Length: ' + avg.toFixed(2) + ' Letters')
 }
 
+getAverageWordLength(originalFlavors)
 
 /* STRETCH 2: Baskin Robins now offers new flavors, seasonal flavors, and even regional flavors. Write a function that will randomly select a total of 31 flavors from originalFlavors, currentFlavors, seasonalFlavors, and regionalFlavors.
 
@@ -252,8 +304,27 @@ var regionalFlavors = ["Pink Bubblegum",
     "Chocolate Chocolate Chip Cheesecake",
     "Caramel 'n' Cookies"]
 
-function getRandomFlavors(/*code here*/){
+function getRandomFlavors(arr1, arr2, arr3, arr4){
 
-    /*code here*/
+    let newArr = [...arr1]
+    for (let i=0; i<arr2.length; i++){
+        newArr.push(arr2[i])
+    }
+    for (let i=0; i<arr3.length; i++){
+        newArr.push(arr3[i])
+    }
+    for (let i=0; i<arr4.length; i++){
+        newArr.push(arr4[i])    
+    }
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);}
 
+    let randomArr = []
+    for (let i=0; i<31; i++){
+        randomArr.push(newArr.splice(getRandomInt(newArr.length), 1))
+    }
+console.log(randomArr.length + ' Random Flavors:')
+console.log(randomArr)
+return randomArr
 }
+getRandomFlavors(originalFlavors, newFlavors,  seasonalFlavors, regionalFlavors)
